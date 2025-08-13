@@ -1,4 +1,4 @@
-package io.github.forgestove.reforge;
+package reforge;
 import arc.Events;
 import arc.util.Strings;
 import mindustry.Vars;

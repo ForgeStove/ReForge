@@ -1,4 +1,4 @@
-package io.github.forgestove.reforge;
+package reforge;
 import mindustry.Vars;
 import mindustry.content.UnitTypes;
 import mindustry.world.blocks.distribution.Router;

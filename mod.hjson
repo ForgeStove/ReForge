@@ -1,7 +1,7 @@
-name: "ReForge"
-displayName: "ReForge"
-author: "ForgeStove"
-main: "io.github.forgestove.reforge.ReForge"
+name: ReForge
+displayName: ReForge
+author: ForgeStove
+main: reforge.ReForge
 hidden: true
 version: 1.0.0
 minGameVersion: 147

@@ -1,4 +1,4 @@
-package io.github.forgestove.reforge;
+package reforge;
 import mindustry.mod.Mod;
 @SuppressWarnings("unused")
 public class ReForge extends Mod {

@@ -1,4 +1,4 @@
-package io.github.forgestove.reforge;
+package reforge;
 import arc.*;
 import mindustry.Vars;
 import mindustry.ai.ControlPathfinder;
