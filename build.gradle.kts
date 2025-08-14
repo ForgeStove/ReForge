@@ -44,10 +44,11 @@ tasks.register("jarAndroid") {
                            configurations.runtimeClasspath.get().toList() +
                            listOf(File(platformRoot, "android.jar")))
             .joinToString(" ") { "--classpath ${it.path}" }
-        // 执行dex和desugar文件 - 使用d8的完整路径
-        ProcessBuilder()
-            .command(*("\"$d8Path\" $dependencies --min-api 14 --output ${project.name}Android.jar ${project.name}Desktop.jar")
-                .split(" ").toTypedArray())
+		// 执行dex和desugar文件 - 使用d8的完整路径
+        val command = listOf(d8Path) +
+                     dependencies.split(" ") +
+                     listOf("--min-api", "14", "--output", "${project.name}Android.jar", "${project.name}Desktop.jar")
+        ProcessBuilder(command)
             .directory(File("${layout.buildDirectory.get()}/libs"))
             .redirectOutput(ProcessBuilder.Redirect.INHERIT)
             .redirectError(ProcessBuilder.Redirect.INHERIT)
