@@ -1,8 +1,0 @@
-name: ReForge
-displayName: ReForge
-author: ForgeStove
-main: reforge.ReForge
-hidden: true
-version: 1.0.1
-minGameVersion: 147
-java: true

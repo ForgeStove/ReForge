@@ -1,0 +1,9 @@
+name: ${mod_name}
+displayName: ${mod_displayName}
+author: ${mod_author}
+java: ${mod_java}
+main: ${mod_main}
+hidden: ${mod_hidden}
+version: ${mod_version}
+minGameVersion: ${mod_minGameVersion}
+description: ${mod_description}

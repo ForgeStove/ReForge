@@ -3,12 +3,15 @@ apply plugin: "java"
 
 version '1.0.1'
 
-sourceSets.main.java.srcDirs = ["src"]
-
 repositories {
     mavenCentral()
     maven { url "https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository" }
     maven { url 'https://www.jitpack.io' }
+}
+
+tasks.processResources {
+    outputs.upToDateWhen { false }
+    filesMatching("mod.hjson") { expand(properties) }
 }
 
 java {
@@ -64,9 +67,9 @@ tasks.register('jarAndroid') {
 
 jar {
     archiveFileName = "${base.archivesBaseName}Desktop.jar"
-    from {configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }}
-    from(projectDir) {include "mod.hjson"}
-    from("assets/") {include "**"}
+//    from {configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }}
+//    from(projectDir) {include "mod.hjson"}
+//    from("assets/") {include "**"}
 }
 
 tasks.register('deploy', Jar) {
