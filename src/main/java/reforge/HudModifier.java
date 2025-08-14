@@ -6,7 +6,8 @@ import mindustry.game.EventType.*;
 public class HudModifier {
 	public static boolean worldFog;
 	public static void load() {
-		Events.on(ClientLoadEvent.class, event -> {
+		Events.on(
+			ClientLoadEvent.class, event -> {
 				var game = Vars.ui.settings.game;
 				game.checkPref(Core.bundle.get("allowEditRules"), true);
 				game.checkPref(Core.bundle.get("allowEditWorldProcessors"), true);
@@ -23,7 +24,8 @@ public class HudModifier {
 		);
 		var rules = Vars.state.rules;
 		Events.on(WorldLoadEvent.class, event -> worldFog = rules.fog);
-		Events.run(Trigger.update, () -> {
+		Events.run(
+			Trigger.update, () -> {
 				var settings = Core.settings;
 				rules.allowEditRules = settings.getBool(Core.bundle.get("allowEditRules"));
 				rules.allowEditWorldProcessors = settings.getBool(Core.bundle.get("allowEditWorldProcessors"));
