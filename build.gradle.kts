@@ -12,12 +12,12 @@ tasks.processResources {
 java { targetCompatibility = JavaVersion.VERSION_1_8; sourceCompatibility = JavaVersion.VERSION_17 }
 allprojects { tasks.withType<JavaCompile>().configureEach { options.compilerArgs.addAll(listOf("--release", "8")) } }
 dependencies {
-    compileOnly("com.github.Anuken.Arc:arc-core:${p("mindustryVersion")}")
-    compileOnly("com.github.Anuken.Mindustry:core:${p("mindustryVersion")}")
-    annotationProcessor("com.github.Anuken:jabel:${p("jabelVersion")}")
+    compileOnly("com.github.Anuken.Arc:arc-core:${p("mindustry_version")}")
+    compileOnly("com.github.Anuken.Mindustry:core:${p("mindustry_version")}")
+    annotationProcessor("com.github.Anuken:jabel:${p("jabel_version")}")
 }
 configurations.configureEach {
-    resolutionStrategy.eachDependency { if (requested.group == "com.github.Anuken.Arc") { useVersion(p("mindustryVersion")) } }
+    resolutionStrategy.eachDependency { if (requested.group == "com.github.Anuken.Arc") { useVersion(p("mindustry_version")) } }
 }
 tasks.register("jarAndroid") {
     dependsOn("jar")
