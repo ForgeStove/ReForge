@@ -21,7 +21,6 @@ configurations.configureEach {
 }
 tasks.register("jarAndroid") {
     dependsOn("jar")
-
     doLast {
         val sdkRoot: String? = System.getenv("ANDROID_HOME")
         if (sdkRoot.isNullOrEmpty() || !File(sdkRoot).exists()) {
