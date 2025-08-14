@@ -27,21 +27,30 @@ tasks.register("jarAndroid") {
     dependsOn("jar")
     doLast {
         if (sdkRoot.isNullOrEmpty() || !File(sdkRoot).exists()) {
-			throw GradleException("No valid Android SDK found. Ensure that ANDROID_HOME is set to your Android SDK directory.")
+            throw GradleException("No valid Android SDK found. Ensure that ANDROID_HOME is set to your Android SDK directory.")
         }
+        // 查找最新版本的 platform
         val platformRoot = File("$sdkRoot/platforms/").listFiles()
             ?.sortedDescending()
             ?.find { f -> File(f, "android.jar").exists() }
         if (platformRoot == null) { throw GradleException("No android.jar found. Ensure that you have an Android platform installed.") }
-        // collect dependencies needed for desugaring
+        // 查找最新版本的 build-tools
+        val buildToolsDir = File("$sdkRoot/build-tools/").listFiles()?.maxOrNull()
+            ?: throw GradleException("No build-tools found. Ensure that you have Android build-tools installed.")
+        // 确定 d8 工具的完整路径
+        val d8Path = if (isWindows)
+            File(buildToolsDir, "d8.bat").path
+        else
+            File(buildToolsDir, "d8").path
+        // 收集依赖
         val dependencies = (configurations.compileClasspath.get().files +
-                           configurations.runtimeClasspath.get().files +
-                           listOf(File(platformRoot, "android.jar")))
+                         configurations.runtimeClasspath.get().files +
+                         listOf(File(platformRoot, "android.jar")))
             .joinToString(" ") { "--classpath ${it.path}" }
-
-        val d8 = if (isWindows) "d8.bat" else "d8"
-        // dex and desugar files - this requires d8 in your PATH
-        ProcessBuilder("$d8 $dependencies --min-api 14 --output ${project.name}Android.jar ${project.name}Desktop.jar".split(" "))
+        // 使用完整路径调用 d8 工具
+        val command = "$d8Path $dependencies --min-api 14 --output ${project.name}Android.jar ${project.name}Desktop.jar"
+        println("Executing command: $command")
+        ProcessBuilder(command.split(" "))
             .directory(File("${layout.buildDirectory}/libs"))
             .redirectOutput(ProcessBuilder.Redirect.INHERIT)
             .redirectError(ProcessBuilder.Redirect.INHERIT)
