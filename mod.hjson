@@ -1,0 +1,9 @@
+name: ReForge
+displayName: ReForge
+author: ForgeStove
+java: true
+main: reforge.ReForge
+hidden: true
+version: 1.0.1
+minGameVersion: 147
+description: A mod that reforged abilities.
