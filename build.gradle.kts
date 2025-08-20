@@ -1,4 +1,7 @@
-plugins { java }
+plugins {
+	java
+	id("com.github.breadmoirai.github-release") version "+"
+}
 version = p("mod_version")
 repositories {
     mavenCentral()
@@ -72,5 +75,16 @@ tasks.register<Jar>("deploy") {
             "${layout.buildDirectory.get()}/libs/${project.name}Android.jar"
         )
     }
+}
+githubRelease {
+	token(System.getenv("GITHUB_TOKEN"))
+	owner = "ForgeStove"
+	repo = "ReForge"
+	tagName = "v${p("mod_version")}"
+	releaseName = tagName
+	generateReleaseNotes = true
+	prerelease = false
+	releaseAssets(tasks.named("deploy").get().outputs.files)
+	overwrite = true
 }
 fun p(key: String) = extra[key].toString()
