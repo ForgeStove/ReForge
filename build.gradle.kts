@@ -87,4 +87,4 @@ githubRelease {
 	releaseAssets(tasks.named("deploy").get().outputs.files)
 	overwrite = true
 }
-fun p(key: String) = extra[key].toString()
+fun p(key: String) = property(key).toString()
