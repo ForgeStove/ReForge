@@ -4,6 +4,6 @@ author: ForgeStove
 java: true
 main: reforge.ReForge
 hidden: true
-version: 1.0.1
+version: 1.0.2
 minGameVersion: 147
 description: A mod that reforged abilities.
