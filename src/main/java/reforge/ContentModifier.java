@@ -11,7 +11,6 @@ public class ContentModifier {
 			ContentInitEvent.class, event -> {
 				var content = Vars.content;
 				content.blocks().each(block -> {
-					block.playerUnmineable = false;
 					block.replaceable = true;
 					block.inEditor = true;
 					if (block instanceof Router router) router.buildType = () -> router.new RouterBuild() {
